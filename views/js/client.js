@@ -83,27 +83,44 @@ btnrRegisterUser.addEventListener("click", () => {
 });
 
 btnSendMessage.addEventListener("click", () => {
-  socket.emit("sendMessage", {
-    message: txtUserMessage.value,
-    image: fileURL,
-  });
+  if (fileURL != undefined) {
+    socket.emit("sendMessage", {
+      message: txtUserMessage.value,
+      image: fileURL,
+    });
+  } else {
+    if (txtUserMessage.value.trim() != "") {
+      socket.emit("sendMessage", {
+        message: txtUserMessage.value.trim(),
+        image: fileURL,
+      });
+    }
+  }
+
   txtUserMessage.value = "";
   fileURL = undefined;
-
   printMessages.scrollTop = printMessages.scrollHeight;
 });
 
 txtUserMessage.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
-    socket.emit("sendMessage", {
-      message: txtUserMessage.value,
-      image: fileURL,
-    });
+    if (fileURL != undefined) {
+      socket.emit("sendMessage", {
+        message: txtUserMessage.value,
+        image: fileURL,
+      });
+    } else {
+      if (txtUserMessage.value.trim() != "") {
+        socket.emit("sendMessage", {
+          message: txtUserMessage.value.trim(),
+          image: fileURL,
+        });
+      }
+    }
     txtUserMessage.value = "";
     fileURL = undefined;
+    printMessages.scrollTop = printMessages.scrollHeight;
   }
-
-  printMessages.scrollTop = printMessages.scrollHeight;
 });
 
 btnSendFile.addEventListener("click", () => {
