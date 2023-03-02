@@ -66,6 +66,13 @@ socket.on("sendMessage", ({ message, user, image }) => {
     imagen.src = image;
     printMessages.appendChild(imagen);
   }
+  printMessages.scrollTop = printMessages.scrollHeight;
+});
+
+txtUserNickName.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    btnrRegisterUser.click();
+  }
 });
 
 btnrRegisterUser.addEventListener("click", () => {
