@@ -31,7 +31,7 @@ formChatGrupal.style.display = "none";
 socket.on("login", () => {
   alert(
     "¡Bienvenido " +
-      txtUserNickName.value +
+      txtUserNickName.value.trim() +
       "!\nRecuerda, respetar a los demás usuarios."
   );
   formLogin.style.display = "none";
@@ -43,7 +43,7 @@ socket.on("login", () => {
 socket.on("userExists", () => {
   alert(
     "El nickname: " +
-      txtUserNickName.value +
+      txtUserNickName.value.trim() +
       " ya está en uso, intenta con otro."
   );
   txtUserNickName.value = "";
@@ -76,8 +76,10 @@ txtUserNickName.addEventListener("keypress", function (e) {
 });
 
 btnrRegisterUser.addEventListener("click", () => {
-  let username = txtUserNickName.value;
-  socket.emit("register", username);
+  if (txtUserNickName.value.trim() != "") {
+    let username = txtUserNickName.value.trim();
+    socket.emit("register", username);
+  }
 });
 
 btnSendMessage.addEventListener("click", () => {
