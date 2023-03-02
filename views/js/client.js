@@ -22,7 +22,7 @@ const btnSendFile = document.querySelector("#sendFile");
 
 //  Print
 const printUsersActive = document.querySelector("#usersActive");
-const messagesList = document.querySelector(".messages");
+const printMessages = document.querySelector("#messages");
 
 formContentChat.style.display = "none";
 formShowUsers.style.display = "none";
@@ -57,14 +57,14 @@ socket.on("activeSessions", (users) => {
 });
 
 socket.on("sendMessage", ({ message, user, image }) => {
-  messagesList.insertAdjacentHTML(
+  printMessages.insertAdjacentHTML(
     "beforeend",
     `<div class="message frnd_message"><p>${message}<br /><span>${user}</span></p></div>`
   );
   if (image !== undefined) {
     const imagen = document.createElement("img");
     imagen.src = image;
-    messagesList.appendChild(imagen);
+    printMessages.appendChild(imagen);
   }
 });
 
@@ -80,6 +80,8 @@ btnSendMessage.addEventListener("click", () => {
   });
   txtUserMessage.value = "";
   fileURL = undefined;
+
+  printMessages.scrollTop = printMessages.scrollHeight;
 });
 
 txtUserMessage.addEventListener("keypress", function (e) {
@@ -91,6 +93,8 @@ txtUserMessage.addEventListener("keypress", function (e) {
     txtUserMessage.value = "";
     fileURL = undefined;
   }
+
+  printMessages.scrollTop = printMessages.scrollHeight;
 });
 
 btnSendFile.addEventListener("click", () => {
