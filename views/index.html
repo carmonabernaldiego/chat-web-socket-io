@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Web Socket.IO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#fff7ed",
+                100: "#ffedd5",
+                200: "#fed7aa",
+                300: "#fdba74",
+                400: "#fb923c",
+                500: "#f97316",
+                600: "#ea580c",
+                700: "#c2410c",
+                800: "#9a3412",
+                900: "#7c2d12",
+              },
+            },
+          },
+          fontFamily: {
+            body: [
+              "Inter",
+              "ui-sans-serif",
+              "system-ui",
+              "-apple-system",
+              "system-ui",
+              "Segoe UI",
+              "Roboto",
+              "Helvetica Neue",
+              "Arial",
+              "Noto Sans",
+              "sans-serif",
+              "Apple Color Emoji",
+              "Segoe UI Emoji",
+              "Segoe UI Symbol",
+              "Noto Color Emoji",
+            ],
+            sans: [
+              "Inter",
+              "ui-sans-serif",
+              "system-ui",
+              "-apple-system",
+              "system-ui",
+              "Segoe UI",
+              "Roboto",
+              "Helvetica Neue",
+              "Arial",
+              "Noto Sans",
+              "sans-serif",
+              "Apple Color Emoji",
+              "Segoe UI Emoji",
+              "Segoe UI Symbol",
+              "Noto Color Emoji",
+            ],
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <section class="bg-gray-50" id="formLogin">
+      <div
+        class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0"
+      >
+        <a
+          href="#"
+          class="flex items-center mb-6 text-2xl font-semibold text-gray-900"
+        >
+          Chat Web Socket.IO
+        </a>
+        <div
+          class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0"
+        >
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1
+              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
+            >
+              Inicia sesión en tu cuenta
+            </h1>
+            <div class="space-y-4 md:space-y-6">
+              <div>
+                <label
+                  for="userNickName"
+                  class="block mb-2 text-sm font-medium text-gray-900"
+                  >Usuario</label
+                >
+                <input
+                  type="text"
+                  name="userNickName"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  id="userNickName"
+                  placeholder="Ingresa tu nickname"
+                  required=""
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                id="registerUser"
+              >
+                Acceder
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-container">
+      <div>
+        <ul class="screens">
+          <li id="chatGrupal" class="screen">
+            <div class="chatArea">
+              <ul class="messages"></ul>
+            </div>
+            <input class="inputMessage" placeholder="Escribe aqui..." />
+            <input
+              class="photoInput"
+              type="file"
+              accept="image/png, image/jpeg"
+              hidden
+            />
+            <div class="buttons">
+              <button class="photoButton">Foto</button>
+              <button class="inputMessageButton">Enviar</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="formShowUsers">
+        <h2>Usuarios Conectados:</h2>
+        <ul class="conectedUsers"></ul>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/client.js"></script>
+  </body>
+</html>
