@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
     io.emit("activeSessions", list_users);
   });
 
-  socket.on("sendMessage", ({ message, file }) => {
-    io.emit("sendMessage", { message, user: socket.nickname, file });
+  socket.on("sendMessage", ({ message, image }) => {
+    io.emit("sendMessage", { message, user: socket.nickname, image });
   });
 });

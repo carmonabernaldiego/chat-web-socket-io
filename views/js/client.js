@@ -4,6 +4,7 @@ let fileURL;
 
 //  Formularios
 const formLogin = document.querySelector("#formLogin");
+const formContentChat = document.querySelector(".body-chat");
 const formShowUsers = document.querySelector("#formShowUsers");
 const formChatGrupal = document.querySelector("#formChatGrupal");
 
@@ -23,6 +24,7 @@ const btnSendFile = document.querySelector("#sendFile");
 const printUsersActive = document.querySelector("#usersActive");
 const messagesList = document.querySelector(".messages");
 
+formContentChat.style.display = "none";
 formShowUsers.style.display = "none";
 formChatGrupal.style.display = "none";
 
@@ -33,6 +35,7 @@ socket.on("login", () => {
       "!\nRecuerda, respetar a los demás usuarios."
   );
   formLogin.style.display = "none";
+  formContentChat.style.display = "flex";
   formShowUsers.style.display = "block";
   formChatGrupal.style.display = "block";
 });
@@ -53,46 +56,44 @@ socket.on("activeSessions", (users) => {
   }
 });
 
-socket.on("sendMessage", ({ message, user, file }) => {
+socket.on("sendMessage", ({ message, user, image }) => {
   messagesList.insertAdjacentHTML(
     "beforeend",
     `<div class="message frnd_message"><p>${message}<br /><span>${user}</span></p></div>`
   );
-  if (file !== undefined) {
-    const image = document.createElement("img");
-    image.src = file;
-    messagesList.appendChild(image);
+  if (image !== undefined) {
+    const imagen = document.createElement("img");
+    imagen.src = image;
+    messagesList.appendChild(imagen);
   }
 });
 
 btnrRegisterUser.addEventListener("click", () => {
-  let nickname = txtUserNickName.value;
-  socket.emit("register", nickname);
+  let username = txtUserNickName.value;
+  socket.emit("register", username);
 });
 
 btnSendMessage.addEventListener("click", () => {
-  txtUserMessage.value = txtUserMessage.value.trim();
-  if (txtUserMessage.value != "") {
+  if (txtUserMessage.value.trim() != "") {
     socket.emit("sendMessage", {
       message: txtUserMessage.value,
-      file: fileURL,
+      image: fileURL,
     });
-    txtUserMessage.value = "";
-    fileURL = undefined;
   }
+  txtUserMessage.value = "";
+  fileURL = undefined;
 });
 
 txtUserMessage.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
-    txtUserMessage.value = txtUserMessage.value.trim();
-    if (txtUserMessage.value != "") {
+    if (txtUserMessage.value.trim() != "") {
       socket.emit("sendMessage", {
         message: txtUserMessage.value,
-        file: fileURL,
+        image: fileURL,
       });
-      txtUserMessage.value = "";
-      fileURL = undefined;
     }
+    txtUserMessage.value = "";
+    fileURL = undefined;
   }
 });
 
