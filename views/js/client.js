@@ -159,8 +159,9 @@ txtUserMessage.addEventListener("keypress", function (e) {
     }
     txtUserMessage.value = "";
     fileURL = undefined;
-    printMessages.scrollTop = printMessages.scrollHeight;
   }
+
+  printMessages.scrollTop = printMessages.scrollHeight;
 });
 
 btnSendFile.addEventListener("click", () => {
