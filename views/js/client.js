@@ -74,24 +74,20 @@ btnrRegisterUser.addEventListener("click", () => {
 });
 
 btnSendMessage.addEventListener("click", () => {
-  if (txtUserMessage.value.trim() != "") {
-    socket.emit("sendMessage", {
-      message: txtUserMessage.value,
-      image: fileURL,
-    });
-  }
+  socket.emit("sendMessage", {
+    message: txtUserMessage.value,
+    image: fileURL,
+  });
   txtUserMessage.value = "";
   fileURL = undefined;
 });
 
 txtUserMessage.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
-    if (txtUserMessage.value.trim() != "") {
-      socket.emit("sendMessage", {
-        message: txtUserMessage.value,
-        image: fileURL,
-      });
-    }
+    socket.emit("sendMessage", {
+      message: txtUserMessage.value,
+      image: fileURL,
+    });
     txtUserMessage.value = "";
     fileURL = undefined;
   }
