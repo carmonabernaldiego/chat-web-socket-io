@@ -84,16 +84,36 @@ btnrRegisterUser.addEventListener("click", () => {
 
 btnSendMessage.addEventListener("click", () => {
   if (fileURL != undefined) {
-    socket.emit("sendMessage", {
-      message: txtUserMessage.value,
-      image: fileURL,
-    });
-  } else {
-    if (txtUserMessage.value.trim() != "") {
+    if (txtUserMessage.value.startsWith("-private:")) {
+      const selectUser = txtUserMessage.value.split(" ")[1];
+      const message = txtUserMessage.value.substr(selectUser.length + 10);
+      socket.emit("sendMessagesPrivate", {
+        message,
+        image: fileURL,
+        selectUser,
+      });
+    } else {
       socket.emit("sendMessage", {
         message: txtUserMessage.value.trim(),
         image: fileURL,
       });
+    }
+  } else {
+    if (txtUserMessage.value.trim() != "") {
+      if (txtUserMessage.value.startsWith("-private:")) {
+        const selectUser = txtUserMessage.value.split(" ")[1];
+        const message = txtUserMessage.value.substr(selectUser.length + 10);
+        socket.emit("sendMessagesPrivate", {
+          message,
+          image: fileURL,
+          selectUser,
+        });
+      } else {
+        socket.emit("sendMessage", {
+          message: txtUserMessage.value.trim(),
+          image: fileURL,
+        });
+      }
     }
   }
 
@@ -105,16 +125,36 @@ btnSendMessage.addEventListener("click", () => {
 txtUserMessage.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     if (fileURL != undefined) {
-      socket.emit("sendMessage", {
-        message: txtUserMessage.value,
-        image: fileURL,
-      });
-    } else {
-      if (txtUserMessage.value.trim() != "") {
+      if (txtUserMessage.value.startsWith("-private:")) {
+        const selectUser = txtUserMessage.value.split(" ")[1];
+        const message = txtUserMessage.value.substr(selectUser.length + 10);
+        socket.emit("sendMessagesPrivate", {
+          message,
+          image: fileURL,
+          selectUser,
+        });
+      } else {
         socket.emit("sendMessage", {
           message: txtUserMessage.value.trim(),
           image: fileURL,
         });
+      }
+    } else {
+      if (txtUserMessage.value.trim() != "") {
+        if (txtUserMessage.value.startsWith("-private:")) {
+          const selectUser = txtUserMessage.value.split(" ")[1];
+          const message = txtUserMessage.value.substr(selectUser.length + 10);
+          socket.emit("sendMessagesPrivate", {
+            message,
+            image: fileURL,
+            selectUser,
+          });
+        } else {
+          socket.emit("sendMessage", {
+            message: txtUserMessage.value.trim(),
+            image: fileURL,
+          });
+        }
       }
     }
     txtUserMessage.value = "";
