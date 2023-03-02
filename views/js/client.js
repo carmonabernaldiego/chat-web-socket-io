@@ -5,7 +5,7 @@ let fileURL;
 //  Formularios
 const formLogin = document.querySelector("#formLogin");
 const formShowUsers = document.querySelector("#formShowUsers");
-const formChatGrupal = document.querySelector("#chatGrupal");
+const formChatGrupal = document.querySelector("#formChatGrupal");
 
 //  Inputs
 const usernameInput = document.querySelector("#userNickName");

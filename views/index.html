@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat Web Socket.IO</title>
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -114,35 +115,184 @@
         </div>
       </div>
     </section>
+    <section class="body-chat">
+      <div class="container">
+        <div class="leftSide">
+          <div class="header">
+            <div class="userimg">
+              <img src="img/chat-grupal.jpg" class="cover" />
+            </div>
+            <ul class="nav_icons">
+              <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+              <li><ion-icon name="chatbox"></ion-icon></li>
+              <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+          </div>
+          <div class="search_chat">
+            <div>
+              <input type="text" placeholder="" />
+              <ion-icon name="search-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="chatlist">
+            <div class="block active">
+              <div class="imgbx">
+                <img src="img/chat-grupal.jpg" class="cover" />
+              </div>
+              <div class="details">
+                <div class="listHead">
+                  <h4>Chat</h4>
+                  <p class="time" style="visibility: hidden;">
+                    Hora en 2da versión.
+                  </p>
+                </div>
+                <div class="message_p">
+                  <p>Recuerda, respetar a los demás usuarios.</p>
+                </div>
+              </div>
+            </div>
+            <div id="formShowUsers">
+              <div class="block" id="formShowUsers">
+               
+                <div class="details">
+                  <div class="listHead">
+                    <h4>Usuarios en línea:</h4>
+                    <p class="time" style="visibility: hidden;">
+                      Hora en 2da versión.
+                    </p>
+                  </div>
+                  <div class="message_p">
+                    <ul class="conectedUsers"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rightSide">
+          <div class="header">
+            <div class="imgText">
+              <div class="userimg">
+                <img src="img/chat-grupal.jpg" class="cover" />
+              </div>
+              <h4>Chat<br /><span>en línea</span></h4>
+            </div>
+            <ul class="nav_icons">
+              <li><ion-icon name="search-outline"></ion-icon></li>
+              <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+          </div>
 
-    <div class="grid-container">
-      <div>
-        <ul class="screens">
-          <li id="chatGrupal" class="screen">
-            <div class="chatArea">
-              <ul class="messages"></ul>
+          <div class="chatBox">
+            <div class="message my_message">
+              <p>Hi<br /><span>12:15</span></p>
             </div>
-            <input class="inputMessage" placeholder="Escribe aqui..." />
-            <input
-              class="photoInput"
-              type="file"
-              accept="image/png, image/jpeg"
-              hidden
-            />
-            <div class="buttons">
-              <button class="photoButton">Foto</button>
-              <button class="inputMessageButton">Enviar</button>
+            <div class="message frnd_message">
+              <p>Hello<br /><span>12:15</span></p>
             </div>
-          </li>
-        </ul>
+            <div class="message my_message">
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
+                laudantium quia modi magnam, eaque, alias officiis inventore hic
+                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
+              </p>
+            </div>
+            <div class="message frnd_message">
+              <p>
+                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
+                laudantium quia<br /><span>12:15</span>
+              </p>
+            </div>
+            <div class="message my_message">
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Commodi expedita in ut quasi laboriosam fugiat adipisci<br /><span
+                  >12:15</span
+                >
+              </p>
+            </div>
+            <div class="message frnd_message">
+              <p>
+                laudantium quia modi magnam, eaque, alias officiis inventore hic
+                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
+              </p>
+            </div>
+            <div class="message my_message">
+              <p>
+                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
+              </p>
+            </div>
+            <div class="message frnd_message">
+              <p>
+                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
+                laudantium quia modi magnam, eaque, alias officiis inventore hic
+                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
+              </p>
+            </div>
+            <div class="message my_message">
+              <p>ok<br /><span>12:15</span></p>
+            </div>
+            <div class="message frnd_message">
+              <p>
+                Lorem, fugiat adipisci maxime laudantium?<br /><span
+                  >12:15</span
+                >
+              </p>
+            </div>
+            <div class="message my_message">
+              <p>Lorem, ipsum dolor sit<br /><span>12:15</span></p>
+            </div>
+            <div class="message frnd_message">
+              <p>thanks<br /><span>12:15</span></p>
+            </div>
+            <div class="message my_message">
+              <p>veritatis eveniet tenetur<br /><span>12:15</span></p>
+            </div>
+            <div class="message frnd_message">
+              <p>
+                How to make Whatsapp clone using html & css only?<br /><span
+                  >12:15</span
+                >
+              </p>
+            </div>
+            <li id="formChatGrupal" class="screen">
+              <div class="chatArea">
+                <ul class="messages"></ul>
+              </div>
+              <input class="inputMessage" placeholder="Escribe aqui..." />
+              <input
+                class="photoInput"
+                type="file"
+                accept="image/png, image/jpeg"
+                hidden
+              />
+              <div class="buttons">
+                <button class="photoButton">Foto</button>
+                <button class="inputMessageButton">Enviar</button>
+              </div>
+            </li>
+          </div>
+
+          <div class="chatBox_input">
+            <ion-icon name="happy-outline"></ion-icon>
+            <ion-icon name="attach-outline"></ion-icon>
+            <input type="text" placeholder="Escribir mensaje" />
+            <ion-icon name="mic"></ion-icon>
+          </div>
+        </div>
       </div>
-      <div id="formShowUsers">
-        <h2>Usuarios Conectados:</h2>
-        <ul class="conectedUsers"></ul>
-      </div>
-    </div>
+    </section>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/client.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
