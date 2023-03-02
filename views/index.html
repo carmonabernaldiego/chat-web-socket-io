@@ -162,14 +162,14 @@
                     </p>
                   </div>
                   <div class="message_p">
-                    <ul class="conectedUsers"></ul>
+                    <ul id="usersActive"></ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="rightSide">
+        <div class="rightSide" id="formChatGrupal">
           <div class="header">
             <div class="imgText">
               <div class="userimg">
@@ -183,102 +183,14 @@
             </ul>
           </div>
 
-          <div class="chatBox">
-            <div class="message my_message">
-              <p>Hi<br /><span>12:15</span></p>
-            </div>
-            <div class="message frnd_message">
-              <p>Hello<br /><span>12:15</span></p>
-            </div>
-            <div class="message my_message">
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
-                laudantium quia modi magnam, eaque, alias officiis inventore hic
-                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
-              </p>
-            </div>
-            <div class="message frnd_message">
-              <p>
-                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
-                laudantium quia<br /><span>12:15</span>
-              </p>
-            </div>
-            <div class="message my_message">
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Commodi expedita in ut quasi laboriosam fugiat adipisci<br /><span
-                  >12:15</span
-                >
-              </p>
-            </div>
-            <div class="message frnd_message">
-              <p>
-                laudantium quia modi magnam, eaque, alias officiis inventore hic
-                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
-              </p>
-            </div>
-            <div class="message my_message">
-              <p>
-                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
-              </p>
-            </div>
-            <div class="message frnd_message">
-              <p>
-                Commodi expedita in ut quasi laboriosam fugiat adipisci maxime
-                laudantium quia modi magnam, eaque, alias officiis inventore hic
-                cupiditate veritatis eveniet tenetur?<br /><span>12:15</span>
-              </p>
-            </div>
-            <div class="message my_message">
-              <p>ok<br /><span>12:15</span></p>
-            </div>
-            <div class="message frnd_message">
-              <p>
-                Lorem, fugiat adipisci maxime laudantium?<br /><span
-                  >12:15</span
-                >
-              </p>
-            </div>
-            <div class="message my_message">
-              <p>Lorem, ipsum dolor sit<br /><span>12:15</span></p>
-            </div>
-            <div class="message frnd_message">
-              <p>thanks<br /><span>12:15</span></p>
-            </div>
-            <div class="message my_message">
-              <p>veritatis eveniet tenetur<br /><span>12:15</span></p>
-            </div>
-            <div class="message frnd_message">
-              <p>
-                How to make Whatsapp clone using html & css only?<br /><span
-                  >12:15</span
-                >
-              </p>
-            </div>
-            <li id="formChatGrupal" class="screen">
-              <div class="chatArea">
-                <ul class="messages"></ul>
-              </div>
-              <input class="inputMessage" placeholder="Escribe aqui..." />
-              <input
-                class="photoInput"
-                type="file"
-                accept="image/png, image/jpeg"
-                hidden
-              />
-              <div class="buttons">
-                <button class="photoButton">Foto</button>
-                <button class="inputMessageButton">Enviar</button>
-              </div>
-            </li>
+          <div class="chatBox messages">
           </div>
 
           <div class="chatBox_input">
-            <ion-icon name="happy-outline"></ion-icon>
-            <ion-icon name="attach-outline"></ion-icon>
-            <input type="text" placeholder="Escribir mensaje" />
-            <ion-icon name="mic"></ion-icon>
+            <input id="userFile" type="file" accept="image/png, image/jpeg" hidden />
+            <button id="sendFile"><ion-icon name="attach-outline"></ion-icon></button>
+            <input type="text" id="userMessage" placeholder="Escribir mensaje" />
+            <button id="sendMessage"><ion-icon name="send-outline"></ion-icon></button>
           </div>
         </div>
       </div>

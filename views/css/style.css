@@ -256,7 +256,7 @@ section.body-chat
 	width: 100%;
 	height: calc(100% - 120px);
 	padding: 50px;
-	overflow: auto;
+	overflow-y: auto;
 }
 .message
 {

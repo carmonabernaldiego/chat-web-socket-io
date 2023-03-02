@@ -7,69 +7,100 @@ const formLogin = document.querySelector("#formLogin");
 const formShowUsers = document.querySelector("#formShowUsers");
 const formChatGrupal = document.querySelector("#formChatGrupal");
 
-//  Inputs
-const usernameInput = document.querySelector("#userNickName");
-const usernameButton = document.querySelector("#registerUser");
-const inputMessage = document.querySelector(".inputMessage");
-const inputMessageButton = document.querySelector(".inputMessageButton");
-const photoInput = document.querySelector(".photoInput");
-const photoButton = document.querySelector(".photoButton");
+//  Textbox's
+const txtUserNickName = document.querySelector("#userNickName");
+const txtUserMessage = document.querySelector("#userMessage");
 
-//  Globals
+//  File - Image
+const userFile = document.querySelector("#userFile");
+
+//  Button's
+const btnrRegisterUser = document.querySelector("#registerUser");
+const btnSendMessage = document.querySelector("#sendMessage");
+const btnSendFile = document.querySelector("#sendFile");
+
+//  Print
+const printUsersActive = document.querySelector("#usersActive");
 const messagesList = document.querySelector(".messages");
-const conectedUsers = document.querySelector(".conectedUsers");
 
-formChatGrupal.style.display = "none";
 formShowUsers.style.display = "none";
-
-socket.on("activeSessions", (users) => {
-  conectedUsers.innerHTML = "";
-  for (const user in users) {
-    conectedUsers.insertAdjacentHTML("beforeend", `<li>${user}</li>`);
-  }
-});
+formChatGrupal.style.display = "none";
 
 socket.on("login", () => {
-  alert("Bienvenido al Chat, respeta las reglas!");
+  alert(
+    "¡Bienvenido " +
+      txtUserNickName.value +
+      "!\nRecuerda, respetar a los demás usuarios."
+  );
   formLogin.style.display = "none";
-  formChatGrupal.style.display = "inline";
-  formShowUsers.style.display = "inline";
+  formShowUsers.style.display = "block";
+  formChatGrupal.style.display = "block";
 });
 
 socket.on("userExists", () => {
-  alert("El nombre que intentas usar no esta disponible, intenta uno nuevo");
-  usernameInput.value = "";
+  alert(
+    "El nickname: " +
+      txtUserNickName.value +
+      " ya está en uso, intenta con otro."
+  );
+  txtUserNickName.value = "";
 });
 
-socket.on("sendMessage", ({ message, user, image }) => {
-  messagesList.insertAdjacentHTML("beforeend", `<li>${user}: ${message}</li>`);
-  if (image !== undefined) {
-    const imagen = document.createElement("img");
-    imagen.src = image;
-    messagesList.appendChild(imagen);
+socket.on("activeSessions", (users) => {
+  printUsersActive.innerHTML = "";
+  for (const user in users) {
+    printUsersActive.insertAdjacentHTML("beforeend", `<li>${user}</li>`);
   }
-  window.scrollTo(0, document.body.scrollHeight);
 });
 
-usernameButton.addEventListener("click", () => {
-  let username = usernameInput.value;
-  socket.emit("register", username);
+socket.on("sendMessage", ({ message, user, file }) => {
+  messagesList.insertAdjacentHTML(
+    "beforeend",
+    `<div class="message frnd_message"><p>${message}<br /><span>${user}</span></p></div>`
+  );
+  if (file !== undefined) {
+    const image = document.createElement("img");
+    image.src = file;
+    messagesList.appendChild(image);
+  }
 });
 
-inputMessageButton.addEventListener("click", () => {
-  socket.emit("sendMessage", {
-    message: inputMessage.value,
-    image: fileURL,
-  });
-  inputMessage.value = "";
-  fileURL = undefined;
+btnrRegisterUser.addEventListener("click", () => {
+  let nickname = txtUserNickName.value;
+  socket.emit("register", nickname);
 });
 
-photoButton.addEventListener("click", () => {
-  photoInput.click();
+btnSendMessage.addEventListener("click", () => {
+  txtUserMessage.value = txtUserMessage.value.trim();
+  if (txtUserMessage.value != "") {
+    socket.emit("sendMessage", {
+      message: txtUserMessage.value,
+      file: fileURL,
+    });
+    txtUserMessage.value = "";
+    fileURL = undefined;
+  }
 });
 
-photoInput.addEventListener("change", (e) => {
+txtUserMessage.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    txtUserMessage.value = txtUserMessage.value.trim();
+    if (txtUserMessage.value != "") {
+      socket.emit("sendMessage", {
+        message: txtUserMessage.value,
+        file: fileURL,
+      });
+      txtUserMessage.value = "";
+      fileURL = undefined;
+    }
+  }
+});
+
+btnSendFile.addEventListener("click", () => {
+  userFile.click();
+});
+
+userFile.addEventListener("change", (e) => {
   const file = e.target.files[0];
   const reader = new FileReader();
   reader.onloadend = () => {
@@ -77,6 +108,6 @@ photoInput.addEventListener("change", (e) => {
   };
   reader.readAsDataURL(file);
   fileURL
-    ? alert("Foto Adjuntada")
-    : alert("Adjunte una vez mas para confirmar");
+    ? alert("Error al adjuntar, seleccione nuevamente.")
+    : alert("Foto adjunta, lista para enviar.");
 });

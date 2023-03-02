@@ -11,7 +11,10 @@ app.use(express.static(path.join(__dirname, "views")));
 server.listen(PORT, () => {
   console.log(
     "-+-+-+-+- Servidor iniciado -+-+-+-+-+-\n" +
-    " -+-+-+- http://127.0.0.1:" + PORT + " -+-+-+-");
+      " -+-+-+- http://127.0.0.1:" +
+      PORT +
+      " -+-+-+-"
+  );
 });
 
 io.on("connection", (socket) => {
@@ -32,7 +35,7 @@ io.on("connection", (socket) => {
     io.emit("activeSessions", list_users);
   });
 
-  socket.on("sendMessage", ({ message, image }) => {
-    io.emit("sendMessage", { message, user: socket.nickname, image });
+  socket.on("sendMessage", ({ message, file }) => {
+    io.emit("sendMessage", { message, user: socket.nickname, file });
   });
 });
