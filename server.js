@@ -52,7 +52,11 @@ io.on("connection", (socket) => {
         image,
       });
     } else {
-      alert("El usuario al que intentas enviar el mensaje no existe!");
+		message = "El usuario al que intentas enviar el mensaje no existe!"
+		io.to(list_users[socket.nickname]).emit("sendMessage", {
+        message,
+        user: socket.nickname,
+        image
     }
   });
 });
